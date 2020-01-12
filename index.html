@@ -1,0 +1,47 @@
+<pre><code>
+<b style="font-size: 20px;">Modular multiplicative inverse with Extended Euclidean algorithm</b>
+//Modular multiplicative inverse -- https://en.wikipedia.org/wiki/Modular_multiplicative_inverse
+//Extended Euclidean algorithm -- https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm
+
+//Out: [x, y, d], a*x+b*y=d, where d must be 1 
+extendedGCD = (a, b) => { 
+    if (b == 0) return [1, 0, a]; 
+    arr = extendedGCD(b, a % b); 
+    return [arr[1], arr[0]-Math.floor(a/b)*arr[1], arr[2]]; 
+}
+modInv = (m, n) => {
+    return extendedGCD(m, n)[2] == 1 ? extendedGCD(m, n)[0] : "Not exist"
+}
+
+//Tests
+document.write(modInv(21, 36)) // Not exist
+document.write(modInv(2791, 9497)) // 1749
+document.write(modInv(8, 21)) // 8
+document.write(modInv(71, 134676521)) // 41730753
+document.write(modInv(101, 678)) // 47
+document.write(modInv(21, 36)) // Not exist
+
+
+<code></pre>
+<b style="font-size: 20px;">Tests results<br></b>
+<script> 
+    //Out: [x, y, d], a*x+b*y=d, where d must be 1
+
+    extendedGCD = (a, b) => {
+        if (b == 0) return [1, 0, a];
+        arr = extendedGCD(b, a % b);
+        return [arr[1], arr[0] - Math.floor(a / b) * arr[1], arr[2]];
+    }
+
+    modInv = (m, n) => {
+        return extendedGCD(m, n)[2] == 1 ? extendedGCD(m, n)[0] : "Not exist"
+    }
+
+    //Tests
+    document.write(modInv(21, 36) + "<br>") // Not exist
+    document.write(modInv(2791, 9497) + "<br>") // 1749
+    document.write(modInv(8, 21) + "<br>") // 8
+    document.write(modInv(71, 134676521) + "<br>") // 41730753
+    document.write(modInv(101, 678) + "<br>") // 47
+    document.write(modInv(21, 36) + "<br>") // Not exist
+</script>
